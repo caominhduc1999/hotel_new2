@@ -136,6 +136,7 @@ class ThuePhongController extends Controller
         $this->validate($request,
             [
                 'ngayden'  =>  'required|after:today',
+                'ngaytra'  =>  'after:ngayden',
                 'hoten' =>  'required',
                 'sdt' =>  'required',
                 'id_phong' =>  'required',
@@ -144,6 +145,7 @@ class ThuePhongController extends Controller
             [
                 'ngayden.required'     =>  'Vui lòng nhập ngày đặt',
                 'ngayden.after'   =>  'Mời kiểm tra lại ngày đặt',
+                'ngaytra.after'   =>  'Mời kiểm tra lại ngày đặt',
                 'hoten.required'     =>  'Vui lòng nhập họ tên khách hàng',
                 'sdt.required'     =>  'Vui lòng nhập số điện thoại khách hàng',
                 'id_phong.required'     =>  'Vui lòng chọn phòng',

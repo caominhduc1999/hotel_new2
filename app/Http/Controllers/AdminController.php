@@ -131,7 +131,7 @@ class AdminController extends Controller
         }
         else
         {
-            return redirect('dangnhap')->with('thongbao','Sai email hoặc mật khẩu');
+            return redirect('admin/dangnhap')->with('thongbao','Sai email hoặc mật khẩu');
         }
     }
 

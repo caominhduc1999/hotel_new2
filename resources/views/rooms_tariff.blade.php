@@ -16,7 +16,7 @@
         <div>
             <ul class="list-group ">
                 @foreach($loaiphong as $lp)
-                <a style="text-decoration:none; color:inherit" href=""><p class="list-group-item">{{$lp->tenloaiphong}}</p></a>
+                <a style="text-decoration:none; color:inherit" href="rooms_tariff/loaiphong/{{$lp->id}}"><p class="list-group-item">{{$lp->tenloaiphong}}</p></a>
                 @endforeach
             </ul>
         </div>
@@ -29,7 +29,7 @@
             <div class="col-sm-6 wowload fadeInUp"><div class="rooms">
                     <img width="600px" src="anhdaidien/{{$p->anhdaidien}}" class="img-responsive">
                     <div class="info">
-                        <h3>{{$p->tenphong}}</h3><a href="room_details/{{$p->id}}" class="btn btn-default">Chi tiết</a><span> </span><a href="room_details" class="btn btn-default">Đặt Phòng</a>
+                        <h3>{{$p->tenphong}}</h3><a href="room_details/{{$p->id}}" class="btn btn-default">Chi tiết</a><span> </span><a href="book/{{$p->id}}" class="btn btn-default">Đặt Phòng</a>
                     </div>
                 </div>
             </div>

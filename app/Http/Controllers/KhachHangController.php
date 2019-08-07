@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\KhachHang;
+use Illuminate\Support\Facades\Auth;
+
 
 class KhachHangController extends Controller
 {
@@ -118,7 +120,6 @@ class KhachHangController extends Controller
 
         return redirect('admin/khachhang/danhsach')->with('thongbao', 'Xóa thành công');
     }
-
 
 }
 

@@ -19,7 +19,7 @@ class DatPhongController extends Controller
                 'sdt' =>  'required|numeric',
                 'email' =>  'email',
                 'ngayden' =>  'required|after:today',
-                'ngaytra' =>  'required|after:today'
+                'ngaytra' =>  'required|after:today,ngayden'
             ],
             [
                 'hoten.required'    =>  'Vui lòng nhập họ tên',
@@ -28,7 +28,7 @@ class DatPhongController extends Controller
                 'ngayden.required'    =>  'Vui lòng nhập ngày đến',
                 'ngayden.after'    =>  'Vui lòng kiểm tra lại ngày đến',
                 'ngaytra.required'    =>  'Vui lòng nhập ngày đến',
-                'ngaytra.after'    =>  'Vui lòng kiểm tra lại ngày đến'
+                'ngaytra.after'    =>  'Vui lòng kiểm tra lại ngày đến',
             ]);
 
         $khachhang = new KhachHang();
@@ -41,6 +41,12 @@ class DatPhongController extends Controller
         $thuephong->ngayden = $request->ngayden;
         $thuephong->ngaytra = $request->ngaytra;
         $thuephong->id_khachhang = $khachhang->id;
+        if ($request->id_phongdat)
+        {
+            $thuephong->id_phong = $request->id_phongdat;
+        }
+        $thuephong->tongtien = $request->tongtien;
+        $thuephong->ghichu = $request->ghichu;
         $thuephong->save();
 
 

@@ -45,7 +45,9 @@
                         <th>Phòng</th>
                         <th>Ngày đặt</th>
                         <th>Ngày đến</th>
+                        <th>Tổng Tiền</th>
                         <th>Ngày trả</th>
+                        <th>Ghi chú</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -71,6 +73,8 @@
                             <td>{{$dsthuephong->created_at}}</td>
                             <td>{{$dsthuephong->ngayden}}</td>
                             <td>{{$dsthuephong->ngaytra}}</td>
+                            <td>{{$dsthuephong->tongtien}}</td>
+                            <td>{{$dsthuephong->ghichu}}</td>
 
                             <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/thuephong/xoa/{{$dsthuephong->id}}"> Delete</a></td>
                             <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/thuephong/sua/{{$dsthuephong->id}}">Edit</a></td>

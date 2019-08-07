@@ -42,7 +42,7 @@
                 <div class="size-price">Price<span>$ {{number_format($phong->giatien)}} / Night</span></div>
             </div>
             <div class="col-sm-6 col-md-4" style="float: right; margin-top: 50px">
-                <a href="room_details" class="btn btn-default" style="height: 50px; display: flex; align-items: center; justify-content: center">Đặt Phòng Ngay</a>
+                <a href="book/{{$phong->id}}" class="btn btn-default" style="height: 50px; display: flex; align-items: center; justify-content: center">Đặt Phòng Ngay</a>
             </div>
         </div>
 

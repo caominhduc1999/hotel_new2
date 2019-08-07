@@ -47,8 +47,12 @@
                         </div>
                         <div class="form-group">
                             <label>Ảnh</label>
-                            <input class="form-control" name="tenanh" type="file" id="change_image"/>
-                            <img src="" id="demo_image" width="200px" />
+                            <input class="form-control" type="file" id="upload_file" name="tenanh[]" onchange="preview_image();" multiple/>
+                            {{-- 1 image: name = tenanh | multiple images : name = tenanh[]--}}
+                            <br>
+                            <span id="X" style="color: red; cursor: pointer; font-size: 1.2em; border: 1px red solid">Choose Images Again</span>
+                            <br>
+                            <div id="image_preview"></div>
                             @if ($errors->has('tenanh'))
                                 <div class="alert alert-danger">
                                     {{ $errors->first('tenanh') }}
@@ -59,9 +63,7 @@
                         <button type="submit" class="btn btn-default">Save</button>
                         <button type="reset" class="btn btn-default">Reset</button>
                     </form>
-
                 </div>
-
             </div>
             <!-- /.row -->
         </div>
@@ -71,21 +73,48 @@
 @endsection
 
 @section('script')
-    <script>
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
 
-                reader.onload = function (e) {
-                    $('#demo_image').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(input.files[0]);
+    {{----------------------- For 1 image ----------------------------------------------}}
+
+    {{--<script>--}}
+        {{--function readURL(input) {--}}
+            {{--if (input.files && input.files[0]) {--}}
+                {{--var reader = new FileReader();--}}
+
+                {{--reader.onload = function (e) {--}}
+                    {{--$('#demo_image').attr('src', e.target.result);--}}
+                {{--}--}}
+                {{--reader.readAsDataURL(input.files[0]);--}}
+            {{--}--}}
+
+        {{--}--}}
+        {{--$("#change_image").change(function(){--}}
+            {{--readURL(this);--}}
+            {{--$('#demo_image').show();--}}
+        {{--});--}}
+
+
+        {{--$('#X').click(function () {--}}
+            {{--$('#demo_image').hide();--}}
+            {{--$('#change_image').val('');--}}
+        {{--});--}}
+
+    {{--</script>--}}
+
+    {{----------------------------------------------------------------------------------}}
+    <script>
+        function preview_image()
+        {
+            var total_file=document.getElementById("upload_file").files.length;
+            for(var i=0;i<total_file;i++)
+            {
+                $('#image_preview').append("<br><img class='oneimage' width='200px' src='"+URL.createObjectURL(event.target.files[i])+"'><br><br>");
             }
 
+            $('#X').click(function () {
+                $('.oneimage').hide();
+                $('#upload_file').val('');
+            });
         }
-        $("#change_image").change(function(){
-            readURL(this);
-        });
     </script>
-
 @endsection

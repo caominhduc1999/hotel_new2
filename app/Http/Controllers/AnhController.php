@@ -57,18 +57,30 @@ class AnhController extends Controller
 
             ]);
 
-        $anh = new Anh();
-        $anh->id_phong = $request->id_phong;
 
-        $tenanh = rand().'.'.request()->tenanh->getClientOriginalExtension();
-        //dam bao khong random trung nhau
-        while(file_exists('images/'.$tenanh))
+        if ($request->hasFile('tenanh'))
         {
-            $tenanh = rand().'.'.request()->tenanh->getClientOriginalExtension();
+            $files = $request->file('tenanh');
+
+            foreach ($files as $item) {
+
+                $anh = new Anh();
+                $anh->id_phong = $request->id_phong;
+
+                $tenanh = rand().'.'.$item->getClientOriginalExtension();
+                //dam bao khong random trung nhau
+                while(file_exists('images/'.$tenanh))
+                {
+                    $tenanh = rand().'.'.$item->getClientOriginalExtension();
+                }
+                $item->move(public_path('images'), $tenanh);
+                $anh->tenanh = $tenanh;
+
+                $anh->save();
+            }
         }
-        request()->tenanh->move(public_path('images'), $tenanh);
-        $anh->tenanh = $tenanh;
-        $anh->save();
+
+
 
         return redirect('admin/anh/them')->with('thongbao','Thêm thành công');
 

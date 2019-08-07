@@ -92,9 +92,18 @@
                             <label>Ngày Trả</label>
                             <input class="form-control" type="date" rows="3" min="today" name="ngaytra" value="{{old('ngaytra')}}">
                         </div>
+                        @if ($errors->has('ngaytra'))
+                            <div class="alert alert-danger">
+                                {{ $errors->first('ngaytra') }}
+                            </div>
+                        @endif
+                        <div class="form-group">
+                            <label>Tổng Tiền</label>
+                            <input class="form-control" type="text" rows="3" name="tongtien" value="{{old('tongtien')}}">
+                        </div>
                         <div class="form-group">
                             <label>Ghi chú</label>
-                            <textarea class="form-control" type="text" name="ghichu" >{{old('ngaytra')}}</textarea>
+                            <textarea class="form-control" type="text" name="ghichu" >{{old('ghichu')}}</textarea>
                         </div>
 
                         <button type="submit" class="btn btn-default">Save</button>
