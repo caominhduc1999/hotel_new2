@@ -63,7 +63,7 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
-
+            <div style="float: right"><a href="logincustomer">Login Customer</a></div>
             <ul class="nav navbar-nav">
                 <li><a href="index">Home </a></li>
                 <li><a href="rooms_tariff">Rooms & Tariff</a></li>
@@ -71,6 +71,7 @@
                 <li><a href="gallery">Gallery</a></li>
                 <li><a href="contact">Contact</a></li>
             </ul>
+
         </div><!-- Wnavbar-collapse -->
     </div><!-- container-fluid -->
 </nav>

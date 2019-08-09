@@ -18,6 +18,11 @@ class PageController extends Controller
         return view('index');
     }
 
+    public function logincustomer()
+    {
+        return view('logincustomer');
+    }
+
     public function contact()
     {
         return view('contact');
@@ -25,7 +30,8 @@ class PageController extends Controller
 
     public function gallery()
     {
-        return view('gallery');
+        $anh = Anh::all();
+        return view('gallery',['anh'=>$anh]);
     }
 
     public function introduction()

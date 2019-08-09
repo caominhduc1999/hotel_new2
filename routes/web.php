@@ -24,6 +24,7 @@ Route::get('rooms_tariff','PageController@rooms_tariff');
 Route::get('rooms_tariff/loaiphong/{id}','PageController@rooms_tariff_loaiphong');
 Route::get('room_details/{id}','PageController@room_details');
 Route::get('book/{id}','PageController@book');
+Route::get('logincustomer','PageController@logincustomer');
 
 
 Route::post('datphong','DatPhongController@postDatPhong')->name('datphongluon');
@@ -32,7 +33,6 @@ Route::post('datphong','DatPhongController@postDatPhong')->name('datphongluon');
 Route::get('admin/dangnhap','AdminController@getLogin');
 Route::post('admin/dangnhap','AdminController@postLogin');
 Route::get('admin/dangxuat','AdminController@getLogout');
-
 
 Route::group(['prefix' =>'admin','middleware'=>'adminLogin'],function (){
 
@@ -142,6 +142,10 @@ Route::group(['prefix' =>'admin','middleware'=>'adminLogin'],function (){
 
 });
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 

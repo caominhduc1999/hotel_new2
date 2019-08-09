@@ -36,17 +36,26 @@ class KhachHangController extends Controller
             [
                 'hoten'  =>  'required',
                 'sdt'  =>  'required',
-                'cccd'  =>'required|numeric',
-                'ngaysinh'  =>'before:today',
-                'email' =>  'email'
+                'cccd'  =>'numeric|nullable',
+                'ngaysinh'  =>'before:today|nullable',
+                'email' =>  'email|required',
+                'password'       =>  'required|min:6|max:32',
+                'passwordAgain'  =>  'required|min:6|max:32|same:password',
             ],
             [
                 'hoten.required'     =>  'Vui lòng nhập họ tên',
                 'sdt.required'     =>  'Vui lòng nhập số điện thoại',
-                'cccd.required'     =>  'Vui lòng nhập căn cước công dân',
+                'email.required'     =>  'Vui lòng nhập email',
                 'cccd.numeric'     =>  'Mời kiểm tra lại căn cước công dân',
                 'ngaysinh.before'   =>  'Mời kiểm tra lại ngày sinh',
-                'email' =>  'Email không đúng định dạng'
+                'email' =>  'Email không đúng định dạng',
+                'password.required'          =>  'Vui lòng nhập mật khẩu',
+                'password.min'               =>  'mật khẩu ít nhất 6 kí tự',
+                'password.max'               =>  'mật khẩu nhiều nhất 32 kí tự',
+                'passwordAgain.required'     =>  'Vui lòng nhập mật khẩu xác nhận',
+                'passwordAgain.min'          =>  'pmật khẩu xác nhận ít nhất 6 kí tự',
+                'password.Again.max'         =>  'pmật khẩu xác nhận nhiều nhất 32 kí tự',
+                'passwordAgain.same'         =>  'pmật khẩu xác nhận không khớp',
             ]);
 
         $khachhang = new KhachHang();
@@ -55,10 +64,11 @@ class KhachHangController extends Controller
         $khachhang->ngaysinh = $request->ngaysinh;
         $khachhang->sdt = $request->sdt;
         $khachhang->email = $request->email;
-        $khachhang->pwd = bcrypt($request->pwd);
+        $khachhang->password = bcrypt($request->password);
         $khachhang->diachi = $request->diachi;
         $khachhang->cccd = $request->cccd;
         $khachhang->quoctich = $request->quoctich;
+
         $khachhang->save();
 
         return redirect('admin/khachhang/them')->with('thongbao','Thêm thành công');
@@ -97,7 +107,6 @@ class KhachHangController extends Controller
         $khachhang->ngaysinh = $request->ngaysinh;
         $khachhang->sdt = $request->sdt;
         $khachhang->email = $request->email;
-        $khachhang->pwd = bcrypt($request->pwd);
         $khachhang->diachi = $request->diachi;
         $khachhang->cccd = $request->cccd;
         $khachhang->quoctich = $request->quoctich;

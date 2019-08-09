@@ -59,12 +59,35 @@
                             @endif
                         </div>
                         <div class="form-group">
+                            <label>Password</label>
+                            <input class="form-control" type="password" name="password" placeholder="Please Enter Password"/>
+                            @if ($errors->has('password'))
+                                <div class="alert alert-danger">
+                                    {{ $errors->first('password') }}
+                                </div>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <label>Password Again</label>
+                            <input class="form-control" type="password" name="passwordAgain" placeholder="Please Enter Password"/>
+                            @if ($errors->has('passwordAgain'))
+                                <div class="alert alert-danger">
+                                    {{ $errors->first('passwordAgain') }}
+                                </div>
+                            @endif
+                        </div>
+                        <div class="form-group">
                             <label>Địa chỉ</label>
                             <input class="form-control" type="text" name="diachi" placeholder="Please Enter Address" value="{{old('diachi')}}"/>
                         </div>
                         <div class="form-group">
                             <label>Căn cước công dân</label>
                             <input class="form-control" rows="3" name="cccd" value="{{old('cccd')}}">
+                            @if ($errors->has('cccd'))
+                                <div class="alert alert-danger">
+                                    {{ $errors->first('cccd') }}
+                                </div>
+                            @endif
                         </div>
                         <div class="form-group">
                             <label>Quốc Tịch</label>
