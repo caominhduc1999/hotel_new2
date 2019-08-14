@@ -1,15 +1,14 @@
 @include('header')
 
-
 <div class="container">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
             <div class="login-panel panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Login Customer</h3>
+                    <h3 class="panel-title">Please Sign In</h3>
                 </div>
                 <div class="panel-body">
-                    <form role="form" action="" method="POST">
+                    <form role="form" action="customer/dangnhap" method="POST">
                         <input type="hidden" name="_token" value="{{csrf_token()}}">
                         <fieldset>
                             <div class="form-group">
@@ -32,6 +31,5 @@
         </div>
     </div>
 </div>
-
 
 @include('footer')

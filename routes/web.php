@@ -24,8 +24,9 @@ Route::get('rooms_tariff','PageController@rooms_tariff');
 Route::get('rooms_tariff/loaiphong/{id}','PageController@rooms_tariff_loaiphong');
 Route::get('room_details/{id}','PageController@room_details');
 Route::get('book/{id}','PageController@book');
-Route::get('logincustomer','PageController@logincustomer');
-
+Route::get('customer/dangnhap','PageController@getLogin');
+Route::post('customer/dangnhap','PageController@postLogin');
+Route::get('customer/dangxuat','PageController@getLogout');
 
 Route::post('datphong','DatPhongController@postDatPhong')->name('datphongluon');
 
@@ -33,6 +34,8 @@ Route::post('datphong','DatPhongController@postDatPhong')->name('datphongluon');
 Route::get('admin/dangnhap','AdminController@getLogin');
 Route::post('admin/dangnhap','AdminController@postLogin');
 Route::get('admin/dangxuat','AdminController@getLogout');
+
+
 
 Route::group(['prefix' =>'admin','middleware'=>'adminLogin'],function (){
 
@@ -140,17 +143,36 @@ Route::group(['prefix' =>'admin','middleware'=>'adminLogin'],function (){
 
     });
 
+    Route::group(['prefix'=>'lienhe'], function (){
+        Route::get('danhsach','LienHeController@getDanhSach');
+
+        Route::get('them','LienHeController@getThem');
+        Route::post('them','LienHeController@postThem');
+
+        Route::get('sua/{id}','LienHeController@getSua');
+        Route::post('sua/{id}','LienHeController@postSua');
+
+        Route::get('xoa/{id}','LienHeController@getXoa');
+    });
+
 });
 
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/admin/logout', 'Auth\LoginController@userLogout')->name('user.logout');
 
-Auth::routes();
+Route::prefix('customer')->group(function (){
+    Route::get('/', 'KhachHangController@index')->name('khachhang.dashboard');
+    Route::get('/login','Auth\KhachHangLoginController@showLoginForm')->name('khachhang.login');
+    Route::post('/login','Auth\KhachHangLoginController@login')->name('khachhang.login.submit');
+    Route::get('/logout','Auth\KhachHangLoginController@logout')->name('khachhang.logout');
 
-Route::get('/home', 'HomeController@index')->name('home');
+    //Password Reset Routes
+    Route::post('password/email','Auth\KhachHangForgotPasswordController@sendResetLinkEmail')->name('khachhang.password.email');
+    Route::get('password/reset','Auth\KhachHangForgotPasswordController@showLinkRequestForm')->name('khachhang.password.request');
+    Route::post('/password/reset','Auth\KhachHangResetPasswordController@reset');
+    Route::get('/password/reset/{token}','Auth\KhachHangResetPasswordController@showResetForm')->name('khachhang.password.reset');
+});
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

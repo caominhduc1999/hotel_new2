@@ -63,7 +63,15 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
-            <div style="float: right"><a href="logincustomer">Login Customer</a></div>
+            @if(Auth::guard('khachhang')->check())
+                <div style="float: right">
+                    Xin chào {{Auth::guard('khachhang')->user()->hoten}}
+                    <div><a href="customer/dangxuat">LogOut</a></div>
+                </div>
+
+            @else
+                <div style="float: right"><a href="customer/dangnhap">Login Customer</a></div>
+            @endif
             <ul class="nav navbar-nav">
                 <li><a href="index">Home </a></li>
                 <li><a href="rooms_tariff">Rooms & Tariff</a></li>

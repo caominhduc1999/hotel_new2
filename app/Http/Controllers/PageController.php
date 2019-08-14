@@ -9,6 +9,7 @@ use App\LoaiPhong;
 use App\Phong;
 use App\Anh;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class PageController extends Controller
 {
@@ -16,11 +17,6 @@ class PageController extends Controller
     public function index()
     {
         return view('index');
-    }
-
-    public function logincustomer()
-    {
-        return view('logincustomer');
     }
 
     public function contact()
@@ -65,5 +61,40 @@ class PageController extends Controller
     {
         $phong = Phong::find($id);
         return view('book',['phong'=>$phong]);
+    }
+
+
+    public function getLogin()
+    {
+        return view('logincustomer');
+    }
+
+    //
+    public function postLogin(Request $request)
+    {
+        $this->validate($request,
+            [
+                'email' => 'required',
+                'password' => 'required',
+            ],
+            [
+                'email.required' => 'nhap username',
+                'password.required' => 'nhap password',
+            ]);
+
+        if (Auth::guard('khachhang')->attempt(['email' => $request->email, 'password' => $request->password]))
+        {
+            return redirect('index');
+        }
+        else
+        {
+            return redirect('customer/dangnhap')->with('thongbao','Sai email hoặc mật khẩu');
+        }
+    }
+
+    public function getLogout()
+    {
+        Auth::guard('khachhang')->logout();
+        return redirect('index');
     }
 }

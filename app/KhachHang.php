@@ -2,14 +2,52 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Notifications\KhachHangResetPasswordNotification;
 
 
-class KhachHang extends Model
+class KhachHang extends Authenticatable
 {
 
+    use Notifiable;
+    protected $guarded = 'khachhang';
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'hoten', 'email', 'password','sdt'
+    ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+
     public $timestamps = false;
-    protected $table = 'khachhang';
+    protected $table = 'khachhangs';
 
     public function hoadon()
     {
@@ -21,4 +59,8 @@ class KhachHang extends Model
         return $this->hasMany('App\ThuePhong', 'id_khachhang', 'id');
     }
 
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new KhachHangResetPasswordNotification($token));
+    }
 }

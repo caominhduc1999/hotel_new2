@@ -46,6 +46,17 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+
+        'khachhang' => [
+            'driver' => 'session',
+            'provider' => 'khachhangs',
+        ],
+
+        'khachhang-api' => [
+            'driver' => 'token',
+            'provider' => 'khachhangs',
+            'hash' => false,
+        ],
     ],
 
     /*
@@ -71,6 +82,10 @@ return [
             'model' => App\User::class,
         ],
 
+        'khachhangs' => [
+            'driver' => 'eloquent',
+            'model' => App\KhachHang::class,
+        ],
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
@@ -95,6 +110,12 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+
+        'khachhangs' => [
+            'provider' => 'khachhangs',
             'table' => 'password_resets',
             'expire' => 60,
         ],

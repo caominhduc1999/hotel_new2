@@ -11,6 +11,20 @@ use Illuminate\Support\Facades\Auth;
 class KhachHangController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('auth:khachhang');
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index()
+    {
+        return view('test');
+    }
 
     public function getSearch(Request $request)
     {
@@ -129,6 +143,7 @@ class KhachHangController extends Controller
 
         return redirect('admin/khachhang/danhsach')->with('thongbao', 'Xóa thành công');
     }
+
 
 }
 
