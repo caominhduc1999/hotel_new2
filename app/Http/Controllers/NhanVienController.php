@@ -114,7 +114,7 @@ class NhanVienController extends Controller
 
         $nhanvien->delete();
 
-        return redirect('admin/nhanvien/danhsach')->with('thongbao', 'Xóa thành công');
+        return redirect()->back()->with('thongbao', 'Xóa thành công');
     }
 
 

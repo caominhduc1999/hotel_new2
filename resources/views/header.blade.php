@@ -63,15 +63,15 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
-            @if(Auth::guard('khachhang')->check())
-                <div style="float: right">
-                    Xin chào {{Auth::guard('khachhang')->user()->hoten}}
+            <div style="position: relative; display:flex;justify-content: flex-end">
+                @if(Auth::guard('khachhang')->check())
+                    Xin chào&nbsp;&nbsp;<a style="color: inherit;" href="customer/detail/{{Auth::guard('khachhang')->user()->id}}">{{Auth::guard('khachhang')->user()->hoten}}</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
                     <div><a href="customer/dangxuat">LogOut</a></div>
-                </div>
+                @else
+                    <div><a href="customer/dangnhap">Login Customer</a></div>
+                @endif
+            </div>
 
-            @else
-                <div style="float: right"><a href="customer/dangnhap">Login Customer</a></div>
-            @endif
             <ul class="nav navbar-nav">
                 <li><a href="index">Home </a></li>
                 <li><a href="rooms_tariff">Rooms & Tariff</a></li>
@@ -79,6 +79,7 @@
                 <li><a href="gallery">Gallery</a></li>
                 <li><a href="contact">Contact</a></li>
             </ul>
+
 
         </div><!-- Wnavbar-collapse -->
     </div><!-- container-fluid -->

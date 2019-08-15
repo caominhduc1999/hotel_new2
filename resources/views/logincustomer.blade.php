@@ -1,5 +1,9 @@
 @include('header')
-
+<br>
+<br>
+<br>
+<br>
+<br>
 <div class="container">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
@@ -24,6 +28,9 @@
 
                             @endif
                             <button type="submit" class="btn btn-lg btn-success btn-block">Đăng Nhập</button>
+                            <button type="button" class="btn btn-lg btn-success btn-block"><a style="color: inherit;" href="customer/register">Đăng Ký</a></button>
+                            <br>
+                            <a style="float: right" href="">Quên mật khẩu</a>
                         </fieldset>
                     </form>
                 </div>
@@ -31,5 +38,9 @@
         </div>
     </div>
 </div>
-
+<br>
+<br>
+<br>
+<br>
+<br>
 @include('footer')

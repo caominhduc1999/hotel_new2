@@ -103,7 +103,7 @@ class AdminController extends Controller
         $admin = User::find($id);
         $admin->delete();
 
-        return redirect('admin/danhsachadmin/danhsach')->with('thongbao', 'Xóa thành công');
+        return redirect()->back()->with('thongbao', 'Xóa thành công');
     }
 
 

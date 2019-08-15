@@ -115,7 +115,7 @@ class LoaiPhongController extends Controller
 
         $loaiphong->delete();
 
-        return redirect('admin/loaiphong/danhsach')->with('thongbao', 'Xóa thành công');
+        return redirect()->back()->with('thongbao', 'Xóa thành công');
     }
 
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 
+use App\KhachHang;
 use Illuminate\Http\Request;
 use App\LoaiPhong;
 use App\Phong;
@@ -60,9 +61,93 @@ class PageController extends Controller
     public function book($id)
     {
         $phong = Phong::find($id);
-        return view('book',['phong'=>$phong]);
+        if (Auth::guard('khachhang')->check())
+        {
+            return view('book',['phong'=>$phong]);
+        }
+        else
+            return redirect('customer/dangnhap');
     }
 
+    public function getRegister()
+    {
+        return view('registercustomer');
+    }
+
+    public function postRegister(Request $request)
+    {
+        $this->validate($request,
+            [
+                'hoten'  =>  'required',
+                'sdt'  =>  'required',
+                'email' =>  'email|required',
+                'password'       =>  'required|min:6|max:32',
+                'passwordAgain'  =>  'required|min:6|max:32|same:password',
+            ],
+            [
+                'hoten.required'     =>  'Vui lòng nhập họ tên',
+                'sdt.required'     =>  'Vui lòng nhập số điện thoại',
+                'email.required'     =>  'Vui lòng nhập email',
+                'email' =>  'Email không đúng định dạng',
+                'password.required'          =>  'Vui lòng nhập mật khẩu',
+                'password.min'               =>  'mật khẩu ít nhất 6 kí tự',
+                'password.max'               =>  'mật khẩu nhiều nhất 32 kí tự',
+                'passwordAgain.required'     =>  'Vui lòng nhập mật khẩu xác nhận',
+                'passwordAgain.min'          =>  'mật khẩu xác nhận ít nhất 6 kí tự',
+                'password.Again.max'         =>  'mật khẩu xác nhận nhiều nhất 32 kí tự',
+                'passwordAgain.same'         =>  'mật khẩu xác nhận không khớp',
+            ]);
+
+        $khachhang = new KhachHang();
+        $khachhang->hoten = $request->hoten;
+        $khachhang->sdt = $request->sdt;
+        $khachhang->email = $request->email;
+        $khachhang->password = bcrypt($request->password);
+
+        $khachhang->save();
+
+        return redirect('customer/register')->with('thongbao','Đăng ký thành công');
+    }
+
+    public function getDetail($id)
+    {
+        $khachhang = KhachHang::find($id);
+        return view('detailcustomer',['khachhang'=>$khachhang]);
+    }
+
+    public function postDetail(Request $request,$id)
+    {
+        $khachhang = KhachHang::find($id);
+        $this->validate($request,
+            [
+                'hoten'  =>  'required',
+                'sdt'  =>  'required',
+                'cccd'  =>'required|numeric',
+                'ngaysinh'  =>'before:today',
+                'email' =>  'email|unique:khachhangs,email,'.$id.' '
+            ],
+            [
+                'hoten.required'     =>  'Vui lòng nhập họ tên',
+                'sdt.required'     =>  'Vui lòng nhập số điện thoại',
+                'cccd.required'     =>  'Vui lòng nhập căn cước công dân',
+                'cccd.numeric'     =>  'Mời kiểm tra lại căn cước công dân',
+                'ngaysinh.before'   =>  'Mời kiểm tra lại ngày sinh',
+                'email' =>  'Email không đúng định dạng',
+                'email.unique'  =>  'Email đã tồn tại',
+            ]);
+
+        $khachhang->hoten = $request->hoten;
+        $khachhang->gioitinh = $request->gioitinh;
+        $khachhang->ngaysinh = $request->ngaysinh;
+        $khachhang->sdt = $request->sdt;
+        $khachhang->email = $request->email;
+        $khachhang->diachi = $request->diachi;
+        $khachhang->cccd = $request->cccd;
+        $khachhang->quoctich = $request->quoctich;
+        $khachhang->save();
+
+        return redirect()->back()->with('thongbao','Cập nhật thông tin thành công');
+    }
 
     public function getLogin()
     {

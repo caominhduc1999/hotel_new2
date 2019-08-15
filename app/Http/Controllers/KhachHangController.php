@@ -10,11 +10,13 @@ use Illuminate\Support\Facades\Auth;
 
 class KhachHangController extends Controller
 {
-    //
-    public function __construct()
-    {
-        $this->middleware('auth:khachhang');
-    }
+
+    // disabled for admin to access data customer
+
+//    public function __construct()
+//    {
+//        $this->middleware('auth:khachhang');
+//    }
 
     /**
      * Show the application dashboard.
@@ -52,7 +54,7 @@ class KhachHangController extends Controller
                 'sdt'  =>  'required',
                 'cccd'  =>'numeric|nullable',
                 'ngaysinh'  =>'before:today|nullable',
-                'email' =>  'email|required',
+                'email' =>  'email|required|unique:khachhangs,email',
                 'password'       =>  'required|min:6|max:32',
                 'passwordAgain'  =>  'required|min:6|max:32|same:password',
             ],
@@ -62,7 +64,8 @@ class KhachHangController extends Controller
                 'email.required'     =>  'Vui lòng nhập email',
                 'cccd.numeric'     =>  'Mời kiểm tra lại căn cước công dân',
                 'ngaysinh.before'   =>  'Mời kiểm tra lại ngày sinh',
-                'email' =>  'Email không đúng định dạng',
+                'email.email' =>  'Email không đúng định dạng',
+                'email.unique'  =>  'Email đã tồn tại',
                 'password.required'          =>  'Vui lòng nhập mật khẩu',
                 'password.min'               =>  'mật khẩu ít nhất 6 kí tự',
                 'password.max'               =>  'mật khẩu nhiều nhất 32 kí tự',
@@ -105,7 +108,7 @@ class KhachHangController extends Controller
                 'sdt'  =>  'required',
                 'cccd'  =>'required|numeric',
                 'ngaysinh'  =>'before:today',
-                'email' =>  'email'
+                'email' =>  'email|unique:khachhangs,email,'.$id.' '
             ],
             [
                 'hoten.required'     =>  'Vui lòng nhập họ tên',
@@ -113,7 +116,8 @@ class KhachHangController extends Controller
                 'cccd.required'     =>  'Vui lòng nhập căn cước công dân',
                 'cccd.numeric'     =>  'Mời kiểm tra lại căn cước công dân',
                 'ngaysinh.before'   =>  'Mời kiểm tra lại ngày sinh',
-                'email' =>  'Email không đúng định dạng'
+                'email.email' =>  'Email không đúng định dạng',
+                'email.unique'  =>  'Email đã tồn tại'
             ]);
 
         $khachhang->hoten = $request->hoten;
@@ -141,7 +145,7 @@ class KhachHangController extends Controller
 
         $khachhang->delete();
 
-        return redirect('admin/khachhang/danhsach')->with('thongbao', 'Xóa thành công');
+        return redirect()->back()->with('thongbao', 'Xóa thành công');
     }
 
 

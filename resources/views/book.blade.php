@@ -3,10 +3,18 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-5 col-md-6 col-lg-offset-3">
+            <div>
+                @if(session('thongbao'))
+                    <div class="alert alert-success">
+                        {{session('thongbao')}}
+                    </div>
+                @endif
+            </div>
             <form action="{{route('datphongluon')}}" class="wowload fadeInRight" method="post">
                 @csrf
+                <input type="hidden" name="id_phongdat" value="{{$phong->id}}">
                 <div class="form-group">
-                    <input type="text" class="form-control"  placeholder="Name" name="hoten" value="{{old('hoten')}}">
+                    <input type="text" class="form-control" readonly placeholder="Name" name="hoten" value="{{Auth::guard('khachhang')->user()->hoten}}">
                 </div>
                 @if ($errors->has('hoten'))
                     <div class="alert alert-danger">
@@ -14,7 +22,7 @@
                     </div>
                 @endif
                 <div class="form-group">
-                    <input type="email" class="form-control"  placeholder="Email" name="email" value="{{old('email')}}">
+                    <input type="email" class="form-control" readonly placeholder="Email" name="email" value="{{Auth::guard('khachhang')->user()->email}}">
                 </div>
                 @if ($errors->has('email'))
                     <div class="alert alert-danger">
@@ -22,7 +30,7 @@
                     </div>
                 @endif
                 <div class="form-group">
-                    <input type="text" class="form-control"  placeholder="Phone" name="sdt" value="{{old('sdt')}}">
+                    <input type="text" class="form-control" readonly placeholder="Phone" name="sdt" value="{{Auth::guard('khachhang')->user()->sdt}}">
                 </div>
                 @if ($errors->has('sdt'))
                     <div class="alert alert-danger">
@@ -31,7 +39,7 @@
                 @endif
                 <div class="form-group">
                     <label>Phòng Bạn Đặt</label>
-                    <img src="anhdaidien/{{$phong->anhdaidien}}" name="id_phongdat" alt="">
+                    <img src="anhdaidien/{{$phong->anhdaidien}}" name="id_phongdat" alt="image">
                 </div>
                 <div class="form-group">
                     <label>Giá Phòng / Đêm : ${{$phong->giatien}}</label>

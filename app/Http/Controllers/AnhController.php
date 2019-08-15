@@ -139,7 +139,7 @@ class AnhController extends Controller
         }
 
 
-        return redirect('admin/anh/danhsach')->with('thongbao', 'Xóa thành công');
+        return redirect()->back()->with('thongbao', 'Xóa thành công');
     }
 
 

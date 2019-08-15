@@ -168,7 +168,7 @@ class PhongController extends Controller
 
         $phong->delete();
 
-        return redirect('admin/phong/danhsach')->with('thongbao', 'Xóa thành công');
+        return redirect()->back()->with('thongbao', 'Xóa thành công');
     }
 
 }

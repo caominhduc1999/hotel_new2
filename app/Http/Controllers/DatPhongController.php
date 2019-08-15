@@ -27,13 +27,14 @@ class DatPhongController extends Controller
                 'email.email'    =>  'Không đúng định dạng email',
                 'ngayden.required'    =>  'Vui lòng nhập ngày đến',
                 'ngayden.after'    =>  'Vui lòng kiểm tra lại ngày đến',
-                'ngaytra.required'    =>  'Vui lòng nhập ngày đến',
+                'ngaytra.required'    =>  'Vui lòng nhập ngày đi',
                 'ngaytra.after'    =>  'Vui lòng kiểm tra lại ngày đến',
             ]);
 
         $khachhang = new KhachHang();
         $khachhang->hoten = $request->hoten;
         $khachhang->sdt = $request->sdt;
+        $khachhang->email = $request->email;
         $khachhang->save();
 
         $thuephong = new ThuePhong();
@@ -50,6 +51,6 @@ class DatPhongController extends Controller
         $thuephong->save();
 
 
-        return redirect('index')->with('thongbao','Chúng tôi đã nhận đc yêu cầu. Vui lòng chờ xác nhận');
+        return redirect()->back()->with('thongbao','Chúng tôi đã nhận đc yêu cầu. Vui lòng chờ xác nhận');
     }
 }

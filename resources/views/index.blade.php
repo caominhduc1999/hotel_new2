@@ -34,61 +34,63 @@
                         </div>
                     @endif
                 </div>
-                <h3>Reservation</h3>
+                <h3>REGISTER WITH US NOW</h3>
                 {{--app/Http/Middleware/VerifyCsrfToken.php--}}
                 {{--protected $except = [--}}
                 {{--'your/route'--}}
                 {{--];--}}
-                <form action="{{route('datphongluon')}}" class="wowload fadeInRight" method="post">
+                <form action="{{action('PageController@postRegister')}}" class="wowload fadeInRight" method="post">
                     @csrf
-                    <div class="form-group">
-                        <input type="text" class="form-control"  placeholder="Name" name="hoten" value="{{old('hoten')}}">
-                    </div>
-                    @if ($errors->has('hoten'))
-                        <div class="alert alert-danger">
-                            {{ $errors->first('hoten') }}
+                        <input type="hidden" name="_token" value="{{csrf_token()}}">
+                        <div class="form-group">
+                            <label>Họ Tên</label>
+                            <input class="form-control" name="hoten" placeholder="Please Enter Username" value="{{old('hoten')}}" />
+                            @if ($errors->has('hoten'))
+                                <div class="alert alert-danger">
+                                    {{ $errors->first('hoten') }}
+                                </div>
+                            @endif
                         </div>
-                    @endif
-                    <div class="form-group">
-                        <input type="email" class="form-control"  placeholder="Email" name="email" value="{{old('email')}}">
-                    </div>
-                    @if ($errors->has('email'))
-                        <div class="alert alert-danger">
-                            {{ $errors->first('email') }}
+                        <div class="form-group">
+                            <label>Số điện thoại</label>
+                            <input class="form-control" type="text" name="sdt" placeholder="Please Enter phone" value="{{old('sdt')}}" />
+                            @if ($errors->has('sdt'))
+                                <div class="alert alert-danger">
+                                    {{ $errors->first('sdt') }}
+                                </div>
+                            @endif
                         </div>
-                    @endif
-                    <div class="form-group">
-                        <input type="text" class="form-control"  placeholder="Phone" name="sdt" value="{{old('sdt')}}">
-                    </div>
-                    @if ($errors->has('sdt'))
-                        <div class="alert alert-danger">
-                            {{ $errors->first('sdt') }}
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input class="form-control" type="email" name="email" placeholder="Please Enter email" value="{{old('email')}}" />
+                            @if ($errors->has('email'))
+                                <div class="alert alert-danger">
+                                    {{ $errors->first('email') }}
+                                </div>
+                            @endif
                         </div>
-                    @endif
-                    <div class="form-group">
-                        <label>Book Date :</label>
-                        <input type="date" min="today" class="form-control" name="ngayden" value="{{old('ngayden')}}">
-                    </div>
-                    @if ($errors->has('ngayden'))
-                        <div class="alert alert-danger">
-                            {{ $errors->first('ngayden') }}
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input class="form-control" type="password" name="password" placeholder="Please Enter Password"/>
+                            @if ($errors->has('password'))
+                                <div class="alert alert-danger">
+                                    {{ $errors->first('password') }}
+                                </div>
+                            @endif
                         </div>
-                    @endif
-                    <div class="form-group">
-                        <label>Leave Date :</label>
-                        <input type="date" min="today" class="form-control" name="ngaytra" value="{{old('ngaytra')}}">
-                    </div>
-                    @if ($errors->has('ngaytra'))
-                        <div class="alert alert-danger">
-                            {{ $errors->first('ngaytra') }}
+                        <div class="form-group">
+                            <label>Password Again</label>
+                            <input class="form-control" type="password" name="passwordAgain" placeholder="Please Enter Password"/>
+                            @if ($errors->has('passwordAgain'))
+                                <div class="alert alert-danger">
+                                    {{ $errors->first('passwordAgain') }}
+                                </div>
+                            @endif
                         </div>
-                    @endif
-                    <div class="form-group">
-                        <textarea class="form-control"  placeholder="Message" rows="5"></textarea>
-                    </div>
-                    <button class="btn btn-default" type="submit">Submit</button>
-                </form>
-            </div>
+
+                        <button class="btn btn-default" type="submit">Submit</button>
+                    </form>
+                </div>
         </div>
     </div>
 </div>

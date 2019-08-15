@@ -174,7 +174,7 @@ class ThuePhongController extends Controller
 
         $thuephong->delete();
 
-        return redirect('admin/thuephong/danhsach')->with('thongbao', 'Xóa thành công');
+        return redirect()->back()->with('thongbao', 'Xóa thành công');
     }
 
 

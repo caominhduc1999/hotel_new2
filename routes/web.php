@@ -27,6 +27,10 @@ Route::get('book/{id}','PageController@book');
 Route::get('customer/dangnhap','PageController@getLogin');
 Route::post('customer/dangnhap','PageController@postLogin');
 Route::get('customer/dangxuat','PageController@getLogout');
+Route::get('customer/register','PageController@getRegister');
+Route::post('customer/register','PageController@postRegister');
+Route::get('customer/detail/{id}','PageController@getDetail');
+Route::post('customer/detail/{id}','PageController@postDetail');
 
 Route::post('datphong','DatPhongController@postDatPhong')->name('datphongluon');
 
@@ -34,7 +38,6 @@ Route::post('datphong','DatPhongController@postDatPhong')->name('datphongluon');
 Route::get('admin/dangnhap','AdminController@getLogin');
 Route::post('admin/dangnhap','AdminController@postLogin');
 Route::get('admin/dangxuat','AdminController@getLogout');
-
 
 
 Route::group(['prefix' =>'admin','middleware'=>'adminLogin'],function (){
