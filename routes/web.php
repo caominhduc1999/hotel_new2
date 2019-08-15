@@ -25,22 +25,27 @@ Route::get('rooms_tariff/loaiphong/{id}','PageController@rooms_tariff_loaiphong'
 Route::get('room_details/{id}','PageController@room_details');
 Route::get('book/{id}','PageController@book');
 
+
+Route::group(['prefix' =>  'customer','middleware'=>'customerLogin'],function (){
+    Route::get('detail/{id}','PageController@getDetail');
+    Route::post('detail/{id}','PageController@postDetail');
+
+    Route::get('bill/{id}','PageController@getBill');
+    Route::post('bill/{id}','PageController@postBill');
+
+    Route::get('bill/edit/{id}','PageController@getEditBill');
+    Route::post('bill/edit/{id}','PageController@postEditBill');
+
+    Route::get('bill/delete/{id}','PageController@getDeleteBill');
+});
+
 Route::get('customer/dangnhap','PageController@getLogin');
 Route::post('customer/dangnhap','PageController@postLogin');
 Route::get('customer/dangxuat','PageController@getLogout');
 Route::get('customer/register','PageController@getRegister');
 Route::post('customer/register','PageController@postRegister');
 
-Route::get('customer/detail/{id}','PageController@getDetail');
-Route::post('customer/detail/{id}','PageController@postDetail');
 
-Route::get('customer/bill/{id}','PageController@getBill');
-Route::post('customer/bill/{id}','PageController@postBill');
-
-Route::get('customer/bill/edit/{id}','PageController@getEditBill');
-Route::post('customer/bill/edit/{id}','PageController@postEditBill');
-
-Route::get('customer/bill/delete/{id}','PageController@getDeleteBill');
 
 
 
