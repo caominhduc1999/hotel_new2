@@ -12,7 +12,8 @@
             </div>
             <form action="{{route('datphongluon')}}" class="wowload fadeInRight" method="post">
                 @csrf
-                <input type="hidden" name="id_phongdat" value="{{$phong->id}}">
+                <input type="hidden" name="id_phong" value="{{$phong->id}}">
+                <input type="hidden" name="id_khachhang" value="{{Auth::guard('khachhang')->user()->id}}">
                 <div class="form-group">
                     <input type="text" class="form-control" readonly placeholder="Name" name="hoten" value="{{Auth::guard('khachhang')->user()->hoten}}">
                 </div>

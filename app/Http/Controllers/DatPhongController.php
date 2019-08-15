@@ -31,21 +31,12 @@ class DatPhongController extends Controller
                 'ngaytra.after'    =>  'Vui lòng kiểm tra lại ngày đến',
             ]);
 
-        $khachhang = new KhachHang();
-        $khachhang->hoten = $request->hoten;
-        $khachhang->sdt = $request->sdt;
-        $khachhang->email = $request->email;
-        $khachhang->save();
-
         $thuephong = new ThuePhong();
-        $thuephong->email = $request->email;
         $thuephong->ngayden = $request->ngayden;
         $thuephong->ngaytra = $request->ngaytra;
-        $thuephong->id_khachhang = $khachhang->id;
-        if ($request->id_phongdat)
-        {
-            $thuephong->id_phong = $request->id_phongdat;
-        }
+        $thuephong->email = $request->email;
+        $thuephong->id_khachhang = $request->id_khachhang;
+        $thuephong->id_phong = $request->id_phong;
         $thuephong->tongtien = $request->tongtien;
         $thuephong->ghichu = $request->ghichu;
         $thuephong->save();

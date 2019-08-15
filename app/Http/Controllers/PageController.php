@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 
 use App\KhachHang;
+use App\ThuePhong;
 use Illuminate\Http\Request;
 use App\LoaiPhong;
 use App\Phong;
@@ -147,6 +148,54 @@ class PageController extends Controller
         $khachhang->save();
 
         return redirect()->back()->with('thongbao','Cập nhật thông tin thành công');
+    }
+
+    public function getBill($id)
+    {
+        $khachhang = KhachHang::find($id);
+        $phong = Phong::all();
+        $thuephong = DB::table('thuephong')->where('id_khachhang','=',$khachhang->id)->get();
+        return view('billcustomer',['khachhang'=>$khachhang, 'thuephong'=>$thuephong, 'phong'=>$phong]);
+    }
+
+    public function getEditBill($id)
+    {
+        $thuephong = ThuePhong::find($id);
+        $phong = Phong::all();
+        return view('editbill',['thuephong'=>$thuephong,'phong'=>$phong]);
+    }
+
+    public function postEditBill(Request $request,$id)
+    {
+        $thuephong = ThuePhong::find($id);
+        $id_khachhang = $thuephong->id_khachhang;
+        $this->validate($request,
+            [
+                'ngayden'  =>  'required|after:today',
+                'ngaytra'  =>  'after:ngayden',
+            ],
+            [
+                'ngayden.required'     =>  'Vui lòng nhập ngày đặt',
+                'ngayden.after'   =>  'Mời kiểm tra lại ngày đặt',
+                'ngaytra.after'   =>  'Mời kiểm tra lại ngày đặt',
+            ]);
+
+        $thuephong->ngayden = $request->ngayden;
+        $thuephong->ngaytra = $request->ngaytra;
+        $thuephong->ghichu = $request->ghichu;
+
+        $thuephong->save();
+
+        return redirect('customer/bill/'.$id_khachhang)->with('thongbao','Sửa thành công');
+    }
+
+    public function getDeleteBill($id)
+    {
+        $thuephong = ThuePhong::find($id);
+
+        $thuephong->delete();
+
+        return redirect()->back()->with('thongbao', 'Xóa thành công');
     }
 
     public function getLogin()
