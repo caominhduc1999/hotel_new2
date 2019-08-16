@@ -34,7 +34,7 @@
                         </div>
                     @endif
                 </div>
-                <h3>REGISTER WITH US NOW</h3>
+                <h3>REGISTER NOW</h3>
                 {{--app/Http/Middleware/VerifyCsrfToken.php--}}
                 {{--protected $except = [--}}
                 {{--'your/route'--}}

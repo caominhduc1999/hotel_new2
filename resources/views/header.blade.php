@@ -65,10 +65,15 @@
         <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
             <div style="position: relative; display:flex;justify-content: flex-end">
                 @if(Auth::guard('khachhang')->check())
-                    Xin chào&nbsp;&nbsp;<a style="color: inherit;" href="customer/detail/{{Auth::guard('khachhang')->user()->id}}">{{Auth::guard('khachhang')->user()->hoten}}</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-                    <div><a href="customer/dangxuat">LogOut</a></div>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-secondary">Hello&nbsp;&nbsp;<a style="color: blue;" href="customer/detail/{{Auth::guard('khachhang')->user()->id}}">{{Auth::guard('khachhang')->user()->hoten}}</a></button>
+                        <button type="button" class="btn btn-secondary"><div><a style="color: green; " href="customer/bill/{{Auth::guard('khachhang')->user()->id}}">Đặt Phòng Của Bạn</a></div></button>
+                        <button type="button" class="btn btn-secondary"><div><a style="color: red" href="customer/dangxuat">LogOut</a></div></button>
+                    </div>
                 @else
-                    <div><a href="customer/dangnhap">Login Customer</a></div>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <div><a style="color: grey;" href="customer/dangnhap"><button type="button" class="btn btn-secondary">Login</button></a></div>
+                    </div>
                 @endif
             </div>
 

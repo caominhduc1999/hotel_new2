@@ -30,7 +30,7 @@
                             <button type="submit" class="btn btn-lg btn-success btn-block">Đăng Nhập</button>
                             <button type="button" class="btn btn-lg btn-success btn-block"><a style="color: inherit;" href="customer/register">Đăng Ký</a></button>
                             <br>
-                            <a style="float: right" href="">Quên mật khẩu</a>
+                            <a style="float: right" href="customer/password/reset">Quên mật khẩu</a>
                         </fieldset>
                     </form>
                 </div>

@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class KhachHangController extends Controller
 {
 
-    // disabled for admin to access data customer
+    // comment for admin to access data customer
 
 //    public function __construct()
 //    {

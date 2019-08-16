@@ -45,8 +45,10 @@ Route::get('customer/dangxuat','PageController@getLogout');
 Route::get('customer/register','PageController@getRegister');
 Route::post('customer/register','PageController@postRegister');
 
-
-
+Route::post('customer/password/email','Auth\KhachHangForgotPasswordController@sendResetLinkEmail')->name('send.to.email');
+Route::get('customer/password/reset','Auth\KhachHangForgotPasswordController@showLinkRequestForm');
+Route::post('customer/password/reset','Auth\KhachHangResetPasswordController@reset');
+Route::get('customer/password/reset/{token}','Auth\KhachHangResetPasswordController@showResetForm')->name('password.reset.token');
 
 
 Route::post('datphong','DatPhongController@postDatPhong')->name('datphongluon');
@@ -181,18 +183,18 @@ Route::group(['prefix' =>'admin','middleware'=>'adminLogin'],function (){
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/admin/logout', 'Auth\LoginController@userLogout')->name('user.logout');
-
-Route::prefix('customer')->group(function (){
-    Route::get('/', 'KhachHangController@index')->name('khachhang.dashboard');
-    Route::get('/login','Auth\KhachHangLoginController@showLoginForm')->name('khachhang.login');
-    Route::post('/login','Auth\KhachHangLoginController@login')->name('khachhang.login.submit');
-    Route::get('/logout','Auth\KhachHangLoginController@logout')->name('khachhang.logout');
-
-    //Password Reset Routes
-    Route::post('password/email','Auth\KhachHangForgotPasswordController@sendResetLinkEmail')->name('khachhang.password.email');
-    Route::get('password/reset','Auth\KhachHangForgotPasswordController@showLinkRequestForm')->name('khachhang.password.request');
-    Route::post('/password/reset','Auth\KhachHangResetPasswordController@reset');
-    Route::get('/password/reset/{token}','Auth\KhachHangResetPasswordController@showResetForm')->name('khachhang.password.reset');
-});
+//Route::get('/admin/logout', 'Auth\LoginController@userLogout')->name('user.logout');
+//
+//Route::prefix('customer')->group(function (){
+//    Route::get('/', 'KhachHangController@index')->name('khachhang.dashboard');
+//    Route::get('/login','Auth\KhachHangLoginController@showLoginForm')->name('khachhang.login');
+//    Route::post('/login','Auth\KhachHangLoginController@login')->name('khachhang.login.submit');
+//    Route::get('/logout','Auth\KhachHangLoginController@logout')->name('khachhang.logout');
+//
+//    //Password Reset Routes
+//    Route::post('password/email','Auth\KhachHangForgotPasswordController@sendResetLinkEmail')->name('khachhang.password.email');
+//    Route::get('password/reset','Auth\KhachHangForgotPasswordController@showLinkRequestForm')->name('khachhang.password.request');
+//    Route::post('/password/reset','Auth\KhachHangResetPasswordController@reset');
+//    Route::get('/password/reset/{token}','Auth\KhachHangResetPasswordController@showResetForm')->name('khachhang.password.reset');
+//});
 

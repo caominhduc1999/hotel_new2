@@ -231,4 +231,5 @@ class PageController extends Controller
         Auth::guard('khachhang')->logout();
         return redirect('index');
     }
+
 }

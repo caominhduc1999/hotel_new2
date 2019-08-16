@@ -28,7 +28,7 @@ class KhachHangForgotPasswordController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('guest:khachhang');
     }
 
     protected function broker()
@@ -38,7 +38,7 @@ class KhachHangForgotPasswordController extends Controller
 
     public function showLinkRequestForm()
     {
-        return view('auth.passwords.email-customer');
+        return view('forgotpasswordform');
     }
 }
 

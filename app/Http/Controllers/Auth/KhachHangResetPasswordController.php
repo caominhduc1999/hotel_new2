@@ -29,7 +29,7 @@ class KhachHangResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/customer';
+    protected $redirectTo = '/customer/dangnhap';
 
     /**
      * Create a new controller instance.
@@ -53,7 +53,7 @@ class KhachHangResetPasswordController extends Controller
 
     public function showResetForm(Request $request, $token = null)
     {
-        return view('auth.passwords.reset-customer')->with(
+        return view('resetpasswordform')->with(
             ['token' => $token, 'email' => $request->email]
         );
     }
