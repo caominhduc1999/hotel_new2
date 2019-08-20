@@ -25,6 +25,8 @@ Route::get('rooms_tariff/loaiphong/{id}','PageController@rooms_tariff_loaiphong'
 Route::get('room_details/{id}','PageController@room_details');
 Route::get('book/{id}','PageController@book');
 
+Route::post('comment','CommentController@postComment');
+
 
 Route::group(['prefix' =>  'customer','middleware'=>'customerLogin'],function (){
     Route::get('detail/{id}','PageController@getDetail');

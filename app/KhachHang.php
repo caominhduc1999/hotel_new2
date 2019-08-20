@@ -63,4 +63,9 @@ class KhachHang extends Authenticatable
     {
         $this->notify(new KhachHangResetPasswordNotification($token));
     }
+
+    public function comment()
+    {
+        return $this->hasMany('App\Comment', 'id_khachhang', 'id');
+    }
 }

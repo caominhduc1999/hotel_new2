@@ -72,7 +72,7 @@
                             <td>{{$dsthuephong->created_at}}</td>
                             <td>{{$dsthuephong->ngayden}}</td>
                             <td>{{$dsthuephong->ngaytra}}</td>
-                            <td>{{$dsthuephong->tongtien}}</td>
+                            <td>{{number_format($dsthuephong->tongtien)}}</td>
                             <td>{{$dsthuephong->ghichu}}</td>
 
                             <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/thuephong/xoa/{{$dsthuephong->id}}"> Delete</a></td>

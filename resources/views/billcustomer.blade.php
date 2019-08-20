@@ -42,9 +42,9 @@
                             @endforeach
                         </td>
 
-                        <td>{{$t->ngayden}}</td>
-                        <td>{{$t->ngaytra}}</td>
-                        <td>${{number_format($t->tongtien)}} / đêm</td>
+                        <td>{{date('d-m-Y', strtotime($t->ngayden))}}</td>
+                        <td>{{date('d-m-Y', strtotime($t->ngaytra))}}</td>
+                        <td>$ {{number_format($t->tongtien)}}</td>
 
                         <td class="center btn btn-success"><i class="fa fa-pencil fa-fw"></i><a style="color: inherit" href="customer/bill/edit/{{$t->id}}">Edit</a></td>&nbsp;
                         <td class="center btn btn-danger"><i class="fa fa-trash-o  fa-fw"></i><a style="color: inherit" href="customer/bill/delete/{{$t->id}}"> Delete</a></td>
@@ -53,6 +53,10 @@
                 @endforeach
                 </tbody>
             </table>
+            <div style="float: right; font-size: 1.3em">Tổng Tiền : $ {{number_format($tongtien)}}</div>
+                <br>
+                <br>
+            <div style="float: right; font-size: 1.2em" class="btn btn-default">Thanh Toán</div>
         </div>
     </div>
 </div>

@@ -22,10 +22,63 @@
     <!-- RoomCarousel-->
 
     <div class="room-features spacer">
+        <h2>{{$phong->tenphong}}</h2>
         <div class="row">
             <div class="col-sm-12 col-md-8" style="overflow: hidden">
                 <p>{!! htmlspecialchars_decode($phong->thongtin) !!}</p>
+
+                <!-- Blog Comments -->
+                <br>
+                <br>
+                <br>
+                <!-- Comments Form -->
+                <div class="well">
+                    <h4>Your Comments here ...<span class="glyphicon glyphicon-pencil"></span></h4>
+                    <form role="form" method="POST" action="{{action('CommentController@postComment')}}">
+                        @csrf
+                        <input type="hidden" name="id_phong" value="{{$phong->id}}">
+                        @if(Auth::guard('khachhang')->check())
+                            <input type="hidden" name="id_khachhang" value="{{Auth::guard('khachhang')->user()->id}}">
+                        @endif
+                        <div class="form-group">
+                            <textarea class="form-control" name="noidung" rows="3"></textarea>
+                        </div>
+                        @if(Auth::guard('khachhang')->check())
+                            <button type="submit" class="btn btn-primary">Send</button>
+                        @else
+                            <button type="submit" disabled="" class="btn btn-primary">Send</button>
+                            <br>
+                            <p href="" class="text text-danger">You need to <a href="customer/dangnhap" style="font-size: 1.2em; color: red; ">&nbsp;Login&nbsp;</a> to use this function</p>
+                        @endif
+                    </form>
+                </div>
+
+                <hr>
+
+                <!-- Posted Comments -->
+
+                <!-- Comment -->
+                @foreach($comment as $cm)
+                <div class="media">
+                    <a class="pull-left">
+                        <img class="media-object" src="http://placehold.it/64x64" alt="">
+                    </a>
+                        <div class="media-body">
+                            <h4 class="media-heading">
+                                @foreach($khachhang as $kh)
+                                    @if($cm->id_khachhang == $kh->id)
+                                        {{$kh->hoten}}
+                                    @endif
+                                @endforeach
+                                <small>{{$cm->created_at}}</small>
+                            </h4>
+                            {{$cm->noidung}}
+                        </div>
+                </div>
+                    <br>
+                @endforeach
             </div>
+            <br>
             {{--<div class="col-sm-6 col-md-3 amenitites">--}}
                 {{--<h3>Amenitites</h3>--}}
                 {{--<ul>--}}
@@ -42,7 +95,12 @@
                 <div class="size-price">Price<span>$ {{number_format($phong->giatien)}} / Night</span></div>
             </div>
             <div class="col-sm-6 col-md-4" style="float: right; margin-top: 50px">
-                <a href="book/{{$phong->id}}" class="btn btn-default" style="height: 50px; display: flex; align-items: center; justify-content: center">Đặt Phòng Ngay</a>
+                @if($phong->tinhtrang == 0)
+                    <a href="book/{{$phong->id}}" class="btn btn-default" style="height: 50px; display: flex; align-items: center; justify-content: center">Đặt Phòng Ngay</a>
+                @else
+                    <a href="" class="btn btn-default" style="height: 50px; display: flex; align-items: center; justify-content: center;pointer-events: none;">Đặt Phòng Ngay</a>
+                    <p style="color: red">This room was booked by a customer.<br> Please try again later.</p>
+                @endif
             </div>
         </div>
 

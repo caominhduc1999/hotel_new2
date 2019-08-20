@@ -24,4 +24,9 @@ class Phong extends Model
     {
         return $this->hasMany('App\Anh', 'id_phong', 'id');
     }
+
+    public function phong()
+    {
+        return $this->hasMany('App\Comment', 'id_phong', 'id');
+    }
 }

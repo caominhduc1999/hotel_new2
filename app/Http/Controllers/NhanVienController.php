@@ -75,7 +75,7 @@ class NhanVienController extends Controller
         $this->validate($request,
             [
                 'hoten'  =>  'required',
-                'sdt'  =>  'required',
+                'sdt'  =>  'required|numeric',
                 'diachi'    =>'required',
                 'cccd'  =>  'required|numeric',
                 'ngaysinh'  =>'before:today'
@@ -84,6 +84,7 @@ class NhanVienController extends Controller
             [
                 'hoten.required'     =>  'Vui lòng nhập họ tên',
                 'sdt.required'     =>  'Vui lòng nhập số điện thoại',
+                'sdt.numeric'     =>  'Vui lòng kiểm tra lại số điện thoại',
                 'diachi.required'   =>  'Vui lòng nhập địa chỉ',
                 'cccd.required'     =>  'Vui lòng nhập căn cước công dân',
                 'cccd.numeric'     =>  'Mời kiểm tra lại căn cước công dân',

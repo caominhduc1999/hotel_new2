@@ -92,9 +92,17 @@
             var date2 = new Date($("#date2").val());
 
             var diffdate = parseInt((date2 - date1) / (24 * 3600 * 1000));
-            var giatienphong = parseInt($('#giatienphong').val());
 
-            var tongtien = diffdate * giatienphong;
+            if (diffdate < 0)
+            {
+                tongtien = 0;
+            }
+            else{
+                var giatienphong = parseInt($('#giatienphong').val());
+
+                var tongtien = diffdate * giatienphong;
+            }
+
 
             //check de tranh loi NaN
             if ($('#date1').val() != '' && $('#date2').val() != '')
