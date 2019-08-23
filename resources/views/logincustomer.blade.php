@@ -13,6 +13,7 @@
                 </div>
                 <div class="panel-body">
                     <form role="form" action="customer/dangnhap" method="POST">
+
                         <input type="hidden" name="_token" value="{{csrf_token()}}">
                         <fieldset>
                             <div class="form-group">

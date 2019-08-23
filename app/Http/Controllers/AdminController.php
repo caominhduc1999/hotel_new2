@@ -37,7 +37,7 @@ class AdminController extends Controller
                 'password'       =>  'required|min:6|max:32',
                 'passwordAgain'  =>  'required|min:6|max:32|same:password',
                 'fullname'  =>  'required',
-                'phone'     =>  'required',
+                'phone'     =>  'required|numeric',
                 'email'     =>  'required|email|unique:admin,email'
             ],
             [
@@ -50,6 +50,7 @@ class AdminController extends Controller
                 'passwordAgain.same'         =>  'pmật khẩu xác nhận không khớp',
                 'fullname.required'     =>  'Vui lòng nhập fullname',
                 'phone.required'        =>  'Vui lòng nhập phone',
+                'phone.numeric'        =>  'Vui lòng kiểm tra lại phone',
                 'email.required'        =>  'Vui lòng nhập email',
                 'email.email'           =>  'không đúng định dạng email',
                 'email.unique'          =>  'email đã tồn tại',

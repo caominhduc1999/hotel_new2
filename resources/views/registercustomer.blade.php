@@ -12,7 +12,7 @@
                     {{session('thongbao')}}
                     <br>
                     <?php
-                        echo '<script type="text/javascript">setTimeout(function(){window.location="customer/dangnhap"} , 2000);</script>';
+                        echo '<script type="text/javascript">setTimeout(function(){window.location="customer/dangnhap"} , 1000);</script>';
                     ?>
                 </div>
             @endif

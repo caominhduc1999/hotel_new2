@@ -1,8 +1,6 @@
 @include('header')
 
 
-
-
 <!-- banner -->
 <div class="banner">
     <img src="hotel_asset/images/photos/banner.jpg"  class="img-responsive" alt="slide">

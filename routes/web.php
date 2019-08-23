@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 
-Route::get('index','PageController@index');
+Route::get('index','PageController@index')->name('index');
 Route::get('contact','PageController@contact');
 Route::get('gallery','PageController@gallery');
 Route::get('introduction','PageController@introduction');
@@ -25,7 +25,12 @@ Route::get('rooms_tariff/loaiphong/{id}','PageController@rooms_tariff_loaiphong'
 Route::get('room_details/{id}','PageController@room_details');
 Route::get('book/{id}','PageController@book');
 
+<<<<<<< HEAD
 Route::post('contact','ContactController@postthem');
+=======
+Route::post('comment','CommentController@postComment');
+
+>>>>>>> c2cced5688802677b09135e587d230149e06b57b
 
 Route::group(['prefix' =>  'customer','middleware'=>'customerLogin'],function (){
     Route::get('detail/{id}','PageController@getDetail');
@@ -170,16 +175,16 @@ Route::group(['prefix' =>'admin','middleware'=>'adminLogin'],function (){
 
     });
 
-    Route::group(['prefix'=>'lienhe'], function (){
-        Route::get('danhsach','LienHeController@getDanhSach');
+    Route::group(['prefix'=>'hoadon'], function (){
+        Route::get('danhsach', 'HoaDonController@getDanhSach');
 
-        Route::get('them','LienHeController@getThem');
-        Route::post('them','LienHeController@postThem');
+        Route::get('sua/{id}','HoaDonController@getSua');
+        Route::post('sua/{id}','HoaDonController@postSua');
 
-        Route::get('sua/{id}','LienHeController@getSua');
-        Route::post('sua/{id}','LienHeController@postSua');
+        Route::get('xoa/{id}','HoaDonController@getXoa');
 
-        Route::get('xoa/{id}','LienHeController@getXoa');
+        Route::get('timkiem','HoaDonController@getSearch');
+
     });
 
 });

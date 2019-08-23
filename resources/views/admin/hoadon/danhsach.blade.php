@@ -6,12 +6,9 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Danh sách Thuê Phòng
-                        <small>
-                            <a class="btn btn-success" href="admin/thuephong/them">Thêm Thuê Phòng</a>
-                        </small>
+                    <h1 class="page-header">Danh sách Hóa Đơn
                         <div>
-                            <form  action="admin/thuephong/timkiem" role="search" method="get">
+                            <form  action="admin/hoadon/timkiem" role="search" method="get">
                                 <div class="input-group custom-search-form">
                                     <input style="width: 300px; float: right" type="text"  class="form-control" name="key" placeholder="Search...">
                                     <span class="input-group-btn">
@@ -39,44 +36,33 @@
                     <tr align="center">
                         <th>ID</th>
                         <th>Khách Hàng</th>
-                        <th>Email Khách Hàng</th>
                         <th>Nhân Viên Quyết Toán</th>
-                        <th>Phòng</th>
-                        <th>Ngày đặt</th>
-                        <th>Ngày đến</th>
-                        <th>Ngày trả</th>
-                        <th>Tổng Tiền</th>
-                        <th>Ghi Chú</th>
+                        <th>Tổng Thanh Toán</th>
+                        <th>Ngày Thanh Toán</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($danhsachthuephong as $dsthuephong)
+                    @foreach($danhsachhoadon as $dshoadon)
                         <tr class="odd gradeX" align="center">
-                            <td>{{$dsthuephong->id}}</td>
-                            <td>{{$dsthuephong->khachhang->hoten}}</td>
-                            <td>{{$dsthuephong->email}}</td>
+                            <td>{{$dshoadon->id}}</td>
                             <td>
-                                @if($dsthuephong->id_nhanvien)
-                                    {{$dsthuephong->nhanvien->hoten}}
-                                @else
-                                    {{'...'}}
-                                @endif
-                            </td>
-                            <td>
-                                @foreach($phong as $p)
-                                    @if($dsthuephong->id_phong == $p->id)
-                                        {{$p->tenphong}}
+                                @foreach($khachhang as $kh)
+                                    @if($kh->id == $dshoadon->id_khachhang)
+                                        {{$kh->hoten}}
                                     @endif
                                 @endforeach
                             </td>
-                            <td>{{$dsthuephong->created_at}}</td>
-                            <td>{{$dsthuephong->ngayden}}</td>
-                            <td>{{$dsthuephong->ngaytra}}</td>
-                            <td>{{number_format($dsthuephong->tongtien)}}</td>
-                            <td>{{$dsthuephong->ghichu}}</td>
-
-                            <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/thuephong/xoa/{{$dsthuephong->id}}"> Delete</a></td>
-                            <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/thuephong/sua/{{$dsthuephong->id}}">Edit</a></td>
+                            <td>
+                                @foreach($nhanvien as $nv)
+                                    @if($nv->id == $dshoadon->id_nhanvien)
+                                        {{$nv->hoten}}
+                                    @endif
+                                @endforeach
+                            </td>
+                            <td>{{$dshoadon->tongthanhtoan}}</td>
+                            <td>{{$dshoadon->ngaythanhtoan}}</td>
+                            <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/hoadon/xoa/{{$dshoadon->id}}"> Delete</a></td>
+                            <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/hoadon/sua/{{$dshoadon->id}}"> Edit</a></td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -85,7 +71,7 @@
             <!-- /.row -->
         </div>
         <!-- /.container-fluid -->
-        {{$danhsachthuephong->links()}}
+        {{$danhsachhoadon->links()}}
     </div>
     <!-- /#page-wrapper -->
 

@@ -57,15 +57,15 @@
                         <div class="form-group">
                             <label>Tình Trạng</label>
                             <label class="radio-inline">
-                                <input name="tinhtrang" value="1"  checked="" type="radio"
+                                <input name="tinhtrang" value="1"   type="radio"
                                 @if(old('tinhtrang') == 1)
                                     {{'checked'}}
                                 @endif
                                 >Đầy
                             </label>
                             <label class="radio-inline">
-                                <input name="tinhtrang" value="2" type="radio"
-                                @if(old('tinhtrang') == 2)
+                                <input name="tinhtrang" value="0" checked="" type="radio"
+                                @if(old('tinhtrang') == 0)
                                     {{'checked'}}
                                         @endif
                                 >Trống

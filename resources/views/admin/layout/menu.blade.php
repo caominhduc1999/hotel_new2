@@ -35,7 +35,11 @@
                 <!-- /.nav-second-level -->
             </li>
             <li>
+<<<<<<< HEAD
                 <a href="admin/contact/danhsach"><i class="fa fa-users fa-fw"></i> Danh Sách Liên Hệ<span class="fa arrow"></span></a>
+=======
+                <a href="admin/hoadon/danhsach"><i class="fa fa-users fa-fw"></i> Danh Sách Hoá Đơn<span class="fa arrow"></span></a>
+>>>>>>> c2cced5688802677b09135e587d230149e06b57b
                 <!-- /.nav-second-level -->
             </li>
         </ul>

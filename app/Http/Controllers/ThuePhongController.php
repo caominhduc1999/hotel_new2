@@ -171,7 +171,9 @@ class ThuePhongController extends Controller
     public function getXoa($id)
     {
         $thuephong = ThuePhong::find($id);
-
+        $phong = Phong::where('id','=',$thuephong->id_phong)->first();
+        $phong->tinhtrang = 0;
+        $phong->save();
         $thuephong->delete();
 
         return redirect()->back()->with('thongbao', 'Xóa thành công');

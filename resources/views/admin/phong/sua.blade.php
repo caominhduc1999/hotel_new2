@@ -67,8 +67,8 @@
                                    type="radio">Đầy
                             </label>
                             <label class="radio-inline">
-                                <input name="tinhtrang" value="2"
-                                       @if($phong->tinhtrang == 2)
+                                <input name="tinhtrang" value="0"
+                                       @if($phong->tinhtrang == 0)
                                        {{'checked'}}
                                        @endif
                                    type="radio">Trống

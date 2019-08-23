@@ -51,7 +51,7 @@ class KhachHangController extends Controller
         $this->validate($request,
             [
                 'hoten'  =>  'required',
-                'sdt'  =>  'required',
+                'sdt'  =>  'required|numeric',
                 'cccd'  =>'numeric|nullable',
                 'ngaysinh'  =>'before:today|nullable',
                 'email' =>  'email|required|unique:khachhangs,email',
@@ -61,6 +61,7 @@ class KhachHangController extends Controller
             [
                 'hoten.required'     =>  'Vui lòng nhập họ tên',
                 'sdt.required'     =>  'Vui lòng nhập số điện thoại',
+                'sdt.numeric'     =>  'Vui lòng kiểm tra lại số điện thoại',
                 'email.required'     =>  'Vui lòng nhập email',
                 'cccd.numeric'     =>  'Mời kiểm tra lại căn cước công dân',
                 'ngaysinh.before'   =>  'Mời kiểm tra lại ngày sinh',
@@ -105,7 +106,7 @@ class KhachHangController extends Controller
         $this->validate($request,
             [
                 'hoten'  =>  'required',
-                'sdt'  =>  'required',
+                'sdt'  =>  'required|numeric',
                 'cccd'  =>'required|numeric',
                 'ngaysinh'  =>'before:today',
                 'email' =>  'email|unique:khachhangs,email,'.$id.' '
@@ -113,6 +114,7 @@ class KhachHangController extends Controller
             [
                 'hoten.required'     =>  'Vui lòng nhập họ tên',
                 'sdt.required'     =>  'Vui lòng nhập số điện thoại',
+                'sdt.numeric'     =>  'Vui lòng kiểm tra lại số điện thoại',
                 'cccd.required'     =>  'Vui lòng nhập căn cước công dân',
                 'cccd.numeric'     =>  'Mời kiểm tra lại căn cước công dân',
                 'ngaysinh.before'   =>  'Mời kiểm tra lại ngày sinh',
@@ -142,6 +144,9 @@ class KhachHangController extends Controller
 
         //xoa cac thue phong cua khach hang day
         DB::table('thuephong')->where('id_khachhang',$khachhang->id)->delete();
+
+        //xoa cac comment cua khach hang day
+        DB::table('comment')->where('id_khachhang',$khachhang->id)->delete();
 
         $khachhang->delete();
 

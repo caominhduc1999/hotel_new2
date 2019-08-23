@@ -160,6 +160,8 @@ class PhongController extends Controller
 
         DB::table('thuephong')->where('id_phong',$phong->id)->delete();
 
+        DB::table('comment')->where('id_phong',$phong->id)->delete();
+
         if ($phong->anhdaidien)
         {
             $image_path = 'anhdaidien/'.$phong->anhdaidien;

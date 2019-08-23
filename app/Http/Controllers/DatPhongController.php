@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\DatPhong;
+use App\HoaDon;
 use App\KhachHang;
+use App\Phong;
 use App\ThuePhong;
 use Illuminate\Http\Request;
 
@@ -31,6 +33,10 @@ class DatPhongController extends Controller
                 'ngaytra.after'    =>  'Vui lòng kiểm tra lại ngày đến',
             ]);
 
+        $phong = Phong::find($request->id_phong);
+        $phong->tinhtrang = 1;
+        $phong->save();
+
         $thuephong = new ThuePhong();
         $thuephong->ngayden = $request->ngayden;
         $thuephong->ngaytra = $request->ngaytra;
@@ -39,9 +45,18 @@ class DatPhongController extends Controller
         $thuephong->id_phong = $request->id_phong;
         $thuephong->tongtien = $request->tongtien;
         $thuephong->ghichu = $request->ghichu;
+
         $thuephong->save();
 
 
-        return redirect()->back()->with('thongbao','Chúng tôi đã nhận đc yêu cầu. Vui lòng chờ xác nhận');
+        $hoadon = HoaDon::where('id_khachhang','=',$request->id_khachhang)->first();
+        if (! isset($hoadon))
+        {
+            $hoadon = new HoaDon();
+            $hoadon->id_khachhang = $request->id_khachhang;
+            $hoadon->save();
+        }
+
+        return redirect()->back()->with('thongbao','Đặt phòng thành công');
     }
 }
