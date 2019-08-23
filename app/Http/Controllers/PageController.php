@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 
+use App\HoaDon;
 use App\KhachHang;
 use App\ThuePhong;
 use Illuminate\Http\Request;
@@ -12,6 +13,7 @@ use App\Phong;
 use App\Anh;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\URL;
 
 class PageController extends Controller
 {
@@ -200,10 +202,19 @@ class PageController extends Controller
     public function getDeleteBill($id)
     {
         $thuephong = ThuePhong::find($id);
+        $id_khachhang_thuephong = $thuephong->id_khachhang;
         $phong = Phong::where('id','=',$thuephong->id_phong)->first();
         $phong->tinhtrang = 0;
         $phong->save();
         $thuephong->delete();
+
+        $thuephong_find = ThuePhong::where('id_khachhang','=',$id_khachhang_thuephong)->get();
+
+        if (isset($thuephong_find))
+        {
+            $hoadon = HoaDon::where('id_khachhang','=',$id_khachhang_thuephong)->first();
+            $hoadon->delete();
+        }
 
         return redirect()->back()->with('thongbao', 'Xóa thành công');
     }
@@ -211,12 +222,19 @@ class PageController extends Controller
 
     public function getLogin()
     {
+        session()->put('url.intended',URL::previous());
+        if(Auth::guard('khachhang')->check())
+        {
+            return redirect(request()->session()->get('url.intended'));
+        }
+
         return view('logincustomer');
     }
 
     //
     public function postLogin(Request $request)
     {
+
         $this->validate($request,
             [
                 'email' => 'required',
@@ -229,8 +247,7 @@ class PageController extends Controller
 
         if (Auth::guard('khachhang')->attempt(['email' => $request->email, 'password' => $request->password]))
         {
-            echo "<script>window.history.go(-2);</script>";
-//            return redirect('index');
+            return redirect(request()->session()->get('url.intended'));
         }
         else
         {
@@ -241,7 +258,7 @@ class PageController extends Controller
     public function getLogout()
     {
         Auth::guard('khachhang')->logout();
-        return redirect('index');
+        return redirect()->back();
     }
 
 }

@@ -34,6 +34,10 @@
                 <a href="admin/thuephong/danhsach"><i class="fa fa-users fa-fw"></i> Danh Sách Thuê Phòng<span class="fa arrow"></span></a>
                 <!-- /.nav-second-level -->
             </li>
+            <li>
+                <a href="admin/hoadon/danhsach"><i class="fa fa-users fa-fw"></i> Danh Sách Hoá Đơn<span class="fa arrow"></span></a>
+                <!-- /.nav-second-level -->
+            </li>
         </ul>
     </div>
     <!-- /.sidebar-collapse -->

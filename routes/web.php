@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 
-Route::get('index','PageController@index');
+Route::get('index','PageController@index')->name('index');
 Route::get('contact','PageController@contact');
 Route::get('gallery','PageController@gallery');
 Route::get('introduction','PageController@introduction');
@@ -167,16 +167,16 @@ Route::group(['prefix' =>'admin','middleware'=>'adminLogin'],function (){
 
     });
 
-    Route::group(['prefix'=>'lienhe'], function (){
-        Route::get('danhsach','LienHeController@getDanhSach');
+    Route::group(['prefix'=>'hoadon'], function (){
+        Route::get('danhsach', 'HoaDonController@getDanhSach');
 
-        Route::get('them','LienHeController@getThem');
-        Route::post('them','LienHeController@postThem');
+        Route::get('sua/{id}','HoaDonController@getSua');
+        Route::post('sua/{id}','HoaDonController@postSua');
 
-        Route::get('sua/{id}','LienHeController@getSua');
-        Route::post('sua/{id}','LienHeController@postSua');
+        Route::get('xoa/{id}','HoaDonController@getXoa');
 
-        Route::get('xoa/{id}','LienHeController@getXoa');
+        Route::get('timkiem','HoaDonController@getSearch');
+
     });
 
 });

@@ -1,4 +1,7 @@
 @include('header')
+
+
+
 <div class="container">
 
     <h1 class="title">Luxirious Suites</h1>
@@ -43,12 +46,13 @@
                         <div class="form-group">
                             <textarea class="form-control" name="noidung" rows="3"></textarea>
                         </div>
+
                         @if(Auth::guard('khachhang')->check())
                             <button type="submit" class="btn btn-primary">Send</button>
                         @else
                             <button type="submit" disabled="" class="btn btn-primary">Send</button>
                             <br>
-                            <p href="" class="text text-danger">You need to <a href="customer/dangnhap" style="font-size: 1.2em; color: red; ">&nbsp;Login&nbsp;</a> to use this function</p>
+                            <p class="text text-danger">You need to <a href="customer/dangnhap" style="font-size: 1.2em; color: red; ">&nbsp;Login&nbsp;</a> to use this function</p>
                         @endif
                     </form>
                 </div>
@@ -108,6 +112,6 @@
 
 
 
-
 </div>
 @include('footer')
+

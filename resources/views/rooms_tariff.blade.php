@@ -29,7 +29,12 @@
             <div class="col-sm-6 wowload fadeInUp"><div class="rooms">
                     <img width="600px" src="anhdaidien/{{$p->anhdaidien}}" class="img-responsive">
                     <div class="info">
-                        <h3>{{$p->tenphong}}</h3><a href="room_details/{{$p->id}}" class="btn btn-default">Chi tiết</a><span> </span><a href="book/{{$p->id}}" class="btn btn-default">Đặt Phòng</a>
+                        <h3>{{$p->tenphong}}</h3><a href="room_details/{{$p->id}}" class="btn btn-default">Chi tiết</a><span> </span>
+                        @if($p->tinhtrang == 0)
+                            <a href="book/{{$p->id}}" class="btn btn-default">Đặt Phòng</a>
+                        @else
+                            <a class="btn btn-default" style="color: red; pointer-events: none">Booked</a>
+                        @endif
                     </div>
                 </div>
             </div>
