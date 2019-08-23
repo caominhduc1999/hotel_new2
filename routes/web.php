@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 
@@ -25,6 +25,7 @@ Route::get('rooms_tariff/loaiphong/{id}','PageController@rooms_tariff_loaiphong'
 Route::get('room_details/{id}','PageController@room_details');
 Route::get('book/{id}','PageController@book');
 
+Route::post('contact','ContactController@postthem');
 
 Route::group(['prefix' =>  'customer','middleware'=>'customerLogin'],function (){
     Route::get('detail/{id}','PageController@getDetail');
@@ -61,6 +62,9 @@ Route::get('admin/dangxuat','AdminController@getLogout');
 
 Route::group(['prefix' =>'admin','middleware'=>'adminLogin'],function (){
 
+    Route::get('contact/danhsach','ContactController@getdanhsach');
+
+    
     Route::group(['prefix'=>'danhsachadmin',], function (){
         Route::get('danhsach', 'AdminController@getDanhSach');
 
@@ -73,8 +77,9 @@ Route::group(['prefix' =>'admin','middleware'=>'adminLogin'],function (){
         Route::get('xoa/{id}','AdminController@getXoa');
 
         Route::get('timkiem','AdminController@getSearch');
+        
     });
-
+    
     Route::group(['prefix'=>'khachhang'], function (){
         Route::get('danhsach', 'KhachHangController@getDanhSach');
 
