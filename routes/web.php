@@ -26,7 +26,7 @@ Route::get('room_details/{id}','PageController@room_details');
 Route::get('book/{id}','PageController@book');
 
 Route::post('contact','ContactController@postthem');
-
+// note phần comment
 Route::post('comment','CommentController@postComment');
 Route::group(['prefix' =>  'customer','middleware'=>'customerLogin'],function (){
     Route::get('detail/{id}','PageController@getDetail');
@@ -40,7 +40,7 @@ Route::group(['prefix' =>  'customer','middleware'=>'customerLogin'],function ()
 
     Route::get('bill/delete/{id}','PageController@getDeleteBill');
 });
-
+// note phần khách hàng
 Route::get('customer/dangnhap','PageController@getLogin');
 Route::post('customer/dangnhap','PageController@postLogin');
 Route::get('customer/dangxuat','PageController@getLogout');
@@ -52,10 +52,10 @@ Route::get('customer/password/reset','Auth\KhachHangForgotPasswordController@sho
 Route::post('customer/password/reset','Auth\KhachHangResetPasswordController@reset');
 Route::get('customer/password/reset/{token}','Auth\KhachHangResetPasswordController@showResetForm')->name('password.reset.token');
 
-
+// note phần đặt phòng của khách hàng
 Route::post('datphong','DatPhongController@postDatPhong')->name('datphongluon');
 
-
+// note phần admin
 Route::get('admin/dangnhap','AdminController@getLogin');
 Route::post('admin/dangnhap','AdminController@postLogin');
 Route::get('admin/dangxuat','AdminController@getLogout');
